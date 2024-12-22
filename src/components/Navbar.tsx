@@ -12,7 +12,9 @@ export const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 z-50 px-4">
       <div className="flex items-center justify-between h-full max-w-[2100px] mx-auto">
         <div className="flex items-center gap-4">
-          <SidebarTrigger />
+          <SidebarTrigger>
+            <Menu className="h-5 w-5" />
+          </SidebarTrigger>
           <h1 className="text-xl font-semibold">BlogTube</h1>
         </div>
         

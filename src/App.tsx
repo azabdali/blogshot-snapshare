@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Editor from "./pages/Editor";
+import Blog from "./pages/Blog";
 import { SidebarProvider } from "./components/ui/sidebar";
 import { AppSidebar } from "./components/AppSidebar";
 
@@ -19,10 +20,13 @@ const App = () => (
         <SidebarProvider>
           <div className="min-h-screen flex w-full">
             <AppSidebar />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/editor" element={<Editor />} />
-            </Routes>
+            <div className="flex-1">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/editor" element={<Editor />} />
+                <Route path="/blog" element={<Blog />} />
+              </Routes>
+            </div>
           </div>
         </SidebarProvider>
       </BrowserRouter>
