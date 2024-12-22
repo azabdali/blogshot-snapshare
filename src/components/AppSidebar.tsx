@@ -1,15 +1,14 @@
 import {
-  BarChart2,
-  BookOpen,
-  DollarSign,
-  HelpCircle,
   Home,
-  Info,
-  Mail,
-  MessageSquare,
-  Settings,
   TrendingUp,
+  MessageSquare,
+  BookOpen,
+  BarChart2,
+  DollarSign,
+  Settings,
+  Info,
   FileText,
+  Mail,
   Copyright,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -33,8 +32,8 @@ const mainItems = [
 
 const userItems = [
   { title: "Blog", icon: BookOpen, url: "/blog" },
-  { title: "Statistics", icon: BarChart2, url: "#" },
-  { title: "Profits", icon: DollarSign, url: "#" },
+  { title: "Statistics", icon: BarChart2, url: "/statistics" },
+  { title: "Profits", icon: DollarSign, url: "/profits" },
   { title: "Settings", icon: Settings, url: "#" },
 ];
 

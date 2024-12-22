@@ -8,6 +8,8 @@ import { AppSidebar } from "./components/AppSidebar";
 import Index from "./pages/Index";
 import Editor from "./pages/Editor";
 import Blog from "./pages/Blog";
+import Statistics from "./pages/Statistics";
+import Profits from "./pages/Profits";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/editor" element={<Editor />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/statistics" element={<Statistics />} />
+                <Route path="/profits" element={<Profits />} />
               </Routes>
             </div>
           </div>
