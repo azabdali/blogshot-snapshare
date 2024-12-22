@@ -22,7 +22,8 @@ const App = () => (
         <SidebarProvider>
           <div className="min-h-screen flex w-full">
             <AppSidebar />
-            <div className="flex-1">
+            <div className="flex-1 relative">
+              <div className="absolute inset-0 transition-colors duration-200 bg-black/40 z-40 md:hidden peer-[[data-state=expanded]]:block hidden" />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/editor" element={<Editor />} />

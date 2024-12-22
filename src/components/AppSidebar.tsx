@@ -10,6 +10,7 @@ import {
   FileText,
   Mail,
   Copyright,
+  AlignLeft,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
