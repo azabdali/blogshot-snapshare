@@ -1,15 +1,18 @@
-import { Search, Bell, Video, Menu } from "lucide-react";
+import { Search, Bell, Menu } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { useNavigate } from "react-router-dom";
+import { SidebarTrigger } from "./ui/sidebar";
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <nav className="fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 z-50 px-4">
       <div className="flex items-center justify-between h-full max-w-[2100px] mx-auto">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon">
-            <Menu className="h-5 w-5" />
-          </Button>
+          <SidebarTrigger />
           <h1 className="text-xl font-semibold">BlogTube</h1>
         </div>
         
@@ -30,10 +33,14 @@ export const Navbar = () => {
           <Button variant="ghost" size="icon">
             <Bell className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon">
-            <Video className="h-5 w-5" />
-          </Button>
-          <Button className="bg-youtube-red hover:bg-red-700 text-white">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="https://i.pravatar.cc/150?u=user" />
+            <AvatarFallback>U</AvatarFallback>
+          </Avatar>
+          <Button 
+            className="bg-youtube-red hover:bg-red-700 text-white"
+            onClick={() => navigate("/editor")}
+          >
             Create Post
           </Button>
         </div>
