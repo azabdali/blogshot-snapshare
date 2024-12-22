@@ -11,7 +11,15 @@ import Blog from "./pages/Blog";
 import Statistics from "./pages/Statistics";
 import Profits from "./pages/Profits";
 
-const queryClient = new QueryClient();
+// Initialize QueryClient with default options to handle failed requests gracefully
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
