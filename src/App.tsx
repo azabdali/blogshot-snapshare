@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Editor from "./pages/Editor";
 import { SidebarProvider } from "./components/ui/sidebar";
+import { AppSidebar } from "./components/AppSidebar";
 
 const queryClient = new QueryClient();
 
