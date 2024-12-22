@@ -1,4 +1,4 @@
-import { Search, Bell, Menu } from "lucide-react";
+import { Search, Bell, AlignLeft } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -13,7 +13,7 @@ export const Navbar = () => {
       <div className="flex items-center justify-between h-full max-w-[2100px] mx-auto">
         <div className="flex items-center gap-4 min-w-[200px]">
           <SidebarTrigger>
-            <Menu className="h-5 w-5" />
+            <AlignLeft className="h-5 w-5" />
           </SidebarTrigger>
           <h1 className="text-xl font-semibold">BlogTube</h1>
         </div>

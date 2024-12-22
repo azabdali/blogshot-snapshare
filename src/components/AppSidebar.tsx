@@ -47,7 +47,7 @@ const helpItems = [
 
 export function AppSidebar() {
   return (
-    <Sidebar variant="floating">
+    <Sidebar variant="overlay">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
