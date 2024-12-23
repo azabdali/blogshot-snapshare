@@ -11,7 +11,6 @@ import Blog from "./pages/Blog";
 import Statistics from "./pages/Statistics";
 import Profits from "./pages/Profits";
 
-// Initialize QueryClient with default options to handle failed requests gracefully
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -31,7 +30,7 @@ const App = () => (
           <div className="min-h-screen flex w-full">
             <AppSidebar />
             <div className="flex-1 relative">
-              <div className="absolute inset-0 transition-colors duration-200 bg-black/40 z-40 md:hidden peer-[[data-state=expanded]]:block hidden" />
+              <div className="fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 lg:hidden peer-[[data-state=expanded]]:block hidden" />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/editor" element={<Editor />} />

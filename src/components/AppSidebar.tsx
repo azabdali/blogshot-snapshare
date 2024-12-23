@@ -10,7 +10,6 @@ import {
   FileText,
   Mail,
   Copyright,
-  AlignLeft,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -48,7 +47,7 @@ const helpItems = [
 export function AppSidebar() {
   return (
     <Sidebar variant="floating">
-      <SidebarContent>
+      <SidebarContent className="!block">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -56,7 +55,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link to={item.url}>
-                      <item.icon />
+                      <item.icon className="h-5 w-5" />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -74,7 +73,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link to={item.url}>
-                      <item.icon />
+                      <item.icon className="h-5 w-5" />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -92,7 +91,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link to={item.url}>
-                      <item.icon />
+                      <item.icon className="h-5 w-5" />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
