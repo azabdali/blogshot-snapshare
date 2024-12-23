@@ -13,6 +13,7 @@ import {
   LogIn,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   Sidebar,
   SidebarContent,
@@ -47,7 +48,7 @@ const helpItems = [
 ];
 
 export function AppSidebar() {
-  const isLoggedIn = true; // Changed back to true to show user items
+  const { isLoggedIn } = useAuth();
 
   return (
     <Sidebar variant="floating">

@@ -4,6 +4,7 @@ import { Input } from "./ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useNavigate } from "react-router-dom";
 import { SidebarTrigger } from "./ui/sidebar";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +19,7 @@ import { useState } from "react";
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const toggleTheme = (newTheme: "light" | "dark") => {
@@ -28,7 +29,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    navigate('/');  // Navigate to home page
+    navigate('/');
   };
 
   return (
