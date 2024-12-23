@@ -28,6 +28,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    navigate('/');  // Navigate to home page
   };
 
   return (
