@@ -24,6 +24,7 @@ import {
   SidebarMenuItem,
   SidebarFooter,
 } from "./ui/sidebar";
+import { Button } from "./ui/button";
 
 const mainItems = [
   { title: "Home", icon: Home, url: "/" },
