@@ -29,7 +29,11 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    navigate('/');
+    navigate("/", { replace: true });
+  };
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
   };
 
   return (
@@ -115,7 +119,7 @@ export const Navbar = () => {
           ) : (
             <Button 
               className="bg-youtube-red hover:bg-red-700 text-white"
-              onClick={() => setIsLoggedIn(true)}
+              onClick={handleLogin}
             >
               Sign In
             </Button>
