@@ -10,6 +10,7 @@ import {
   FileText,
   Mail,
   Copyright,
+  LogIn,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -45,6 +46,9 @@ const helpItems = [
 ];
 
 export function AppSidebar() {
+  // For demo purposes, we'll sync this with the Navbar's state later
+  const isLoggedIn = true;
+
   return (
     <Sidebar variant="floating">
       <SidebarContent className="!block">
@@ -53,7 +57,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {mainItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton 
+                    asChild 
+                    tooltip={item.title}
+                    className="hover:bg-gray-100 dark:hover:bg-zinc-800"
+                  >
                     <Link to={item.url}>
                       <item.icon className="h-5 w-5" />
                       <span>{item.title}</span>
@@ -68,18 +76,32 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel>You</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
-              {userItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link to={item.url}>
-                      <item.icon className="h-5 w-5" />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
+            {isLoggedIn ? (
+              <SidebarMenu>
+                {userItems.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton 
+                      asChild 
+                      tooltip={item.title}
+                      className="hover:bg-gray-100 dark:hover:bg-zinc-800"
+                    >
+                      <Link to={item.url}>
+                        <item.icon className="h-5 w-5" />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            ) : (
+              <div className="p-4 text-sm text-gray-600 dark:text-gray-400">
+                <p>Sign in to access your personal content</p>
+                <Button variant="outline" className="mt-2 w-full" onClick={() => {}}>
+                  <LogIn className="mr-2 h-4 w-4" />
+                  Sign In
+                </Button>
+              </div>
+            )}
           </SidebarGroupContent>
         </SidebarGroup>
 
@@ -89,7 +111,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {helpItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton 
+                    asChild 
+                    tooltip={item.title}
+                    className="hover:bg-gray-100 dark:hover:bg-zinc-800"
+                  >
                     <Link to={item.url}>
                       <item.icon className="h-5 w-5" />
                       <span>{item.title}</span>
@@ -103,7 +129,7 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter>
-        <div className="flex items-center gap-2 px-4 py-2 text-sm text-gray-500">
+        <div className="flex items-center gap-2 px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
           <Copyright className="h-4 w-4" />
           <span>2024 BlogTube</span>
         </div>
