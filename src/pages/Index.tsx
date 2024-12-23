@@ -50,7 +50,7 @@ const BLOG_POSTS = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-youtube-lightGray">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
       <CategoryBar />
       <main className="container mx-auto px-4 pt-24 pb-12">
