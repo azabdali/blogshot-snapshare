@@ -47,8 +47,7 @@ const helpItems = [
 ];
 
 export function AppSidebar() {
-  // For demo purposes, we'll sync this with the Navbar's state later
-  const isLoggedIn = false; // Changed to false to demonstrate logged out state
+  const isLoggedIn = true; // Changed back to true to show user items
 
   return (
     <Sidebar variant="floating">

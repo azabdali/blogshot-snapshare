@@ -18,7 +18,7 @@ import { useState } from "react";
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const toggleTheme = (newTheme: "light" | "dark") => {
