@@ -7,11 +7,21 @@ import { SidebarProvider } from "./components/ui/sidebar";
 import { AuthProvider } from "./contexts/AuthContext";
 import { AppSidebar } from "./components/AppSidebar";
 import { Navbar } from "./components/Navbar";
+import { useSidebar } from "@/components/ui/sidebar";
 import Index from "./pages/Index";
 import Editor from "./pages/Editor";
 import Blog from "./pages/Blog";
 import Statistics from "./pages/Statistics";
 import Profits from "./pages/Profits";
+
+const MainContent = ({ children }: { children: React.ReactNode }) => {
+  const { state } = useSidebar();
+  return (
+    <main className="main-content relative" data-sidebar={state}>
+      {children}
+    </main>
+  );
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,9 +42,9 @@ const App = () => (
           <SidebarProvider>
             <div className="min-h-screen flex flex-col w-full">
               <Navbar />
-              <div className="flex-1 flex">
+              <div className="flex-1 flex relative">
                 <AppSidebar />
-                <main className="flex-1 relative">
+                <MainContent>
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/editor" element={<Editor />} />
@@ -43,7 +53,7 @@ const App = () => (
                     <Route path="/profits" element={<Profits />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Routes>
-                </main>
+                </MainContent>
               </div>
             </div>
           </SidebarProvider>

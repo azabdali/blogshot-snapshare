@@ -49,9 +49,9 @@ const BLOG_POSTS = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-youtube-black">
+    <div className="min-h-screen bg-gray-50 dark:bg-youtube-black w-full">
       <CategoryBar />
-      <main className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-4 py-6">
         <section className="mb-12">
           <FeaturedPost {...FEATURED_POST} />
         </section>
@@ -64,7 +64,7 @@ const Index = () => {
             ))}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 };
