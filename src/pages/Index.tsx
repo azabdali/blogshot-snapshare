@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/Navbar";
 import { CategoryBar } from "@/components/CategoryBar";
 import { BlogCard } from "@/components/BlogCard";
 import { FeaturedPost } from "@/components/FeaturedPost";
@@ -50,10 +49,9 @@ const BLOG_POSTS = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+    <div className="min-h-screen bg-gray-50 dark:bg-youtube-black">
       <CategoryBar />
-      <main className="container mx-auto px-4 pt-24 pb-12">
+      <main className="container mx-auto px-4 py-6">
         <section className="mb-12">
           <FeaturedPost {...FEATURED_POST} />
         </section>
