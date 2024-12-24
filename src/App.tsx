@@ -25,8 +25,6 @@ const App = () => (
     <TooltipProvider>
       <AuthProvider>
         <BrowserRouter>
-          <Toaster />
-          <Sonner />
           <div className="min-h-screen w-full bg-background">
             <Navbar />
             <main className="w-full pt-14">
@@ -40,6 +38,8 @@ const App = () => (
               </Routes>
             </main>
           </div>
+          <Toaster />
+          <Sonner />
         </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
