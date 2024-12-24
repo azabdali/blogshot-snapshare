@@ -17,7 +17,7 @@ import Profits from "./pages/Profits";
 const MainContent = ({ children }: { children: React.ReactNode }) => {
   const { state } = useSidebar();
   return (
-    <main className="main-content relative" data-sidebar={state}>
+    <main className="main-content" data-sidebar={state}>
       {children}
     </main>
   );
@@ -40,9 +40,9 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <SidebarProvider>
-            <div className="min-h-screen flex flex-col w-full">
+            <div className="min-h-screen w-full">
               <Navbar />
-              <div className="flex-1 flex relative">
+              <div className="flex relative">
                 <AppSidebar />
                 <MainContent>
                   <Routes>

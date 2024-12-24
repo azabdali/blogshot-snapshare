@@ -49,7 +49,7 @@ const BLOG_POSTS = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-youtube-black w-full">
+    <div className="min-h-full bg-gray-50 dark:bg-youtube-black w-full">
       <CategoryBar />
       <div className="container mx-auto px-4 py-6">
         <section className="mb-12">
@@ -57,7 +57,7 @@ const Index = () => {
         </section>
         
         <section>
-          <h2 className="text-xl font-semibold mb-6">Latest Posts</h2>
+          <h2 className="text-xl font-semibold mb-6 dark:text-white">Latest Posts</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {BLOG_POSTS.map((post) => (
               <BlogCard key={post.title} {...post} />
