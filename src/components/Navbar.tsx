@@ -29,11 +29,12 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    navigate("/", { replace: true });
+    navigate("", { replace: true });
   };
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+    navigate("", { replace: true });
   };
 
   return (
@@ -111,7 +112,7 @@ export const Navbar = () => {
               </DropdownMenu>
               <Button 
                 className="bg-youtube-red hover:bg-red-700 text-white"
-                onClick={() => navigate("/editor")}
+                onClick={() => navigate("editor")}
               >
                 Create Post
               </Button>
