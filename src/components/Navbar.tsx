@@ -1,9 +1,8 @@
-import { Search, Bell, Menu, User, Globe, Languages, Sun, Moon, LogOut } from "lucide-react";
+import { Search, Bell, User, Globe, Languages, Sun, Moon, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useNavigate } from "react-router-dom";
-import { SidebarTrigger } from "./ui/sidebar";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   DropdownMenu,
@@ -40,10 +39,7 @@ export const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 h-14 bg-white dark:bg-youtube-black border-b border-gray-200 dark:border-gray-800 z-50 px-4">
       <div className="flex items-center justify-between h-full max-w-[2100px] mx-auto">
-        <div className="flex items-center gap-4 min-w-[200px]">
-          <SidebarTrigger>
-            <Menu className="h-6 w-6" />
-          </SidebarTrigger>
+        <div className="flex items-center gap-4">
           <h1 className="text-xl font-semibold dark:text-white">BlogTube</h1>
         </div>
         
