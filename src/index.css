@@ -65,9 +65,13 @@
   @apply fixed top-14 left-0 bottom-0 z-40 bg-white dark:bg-youtube-black;
   width: var(--sidebar-width);
   transform: translateX(-100%);
-  transition: transform 0.2s ease-in-out, width 0.2s ease-in-out, opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   visibility: hidden;
   opacity: 0;
+  will-change: transform, width, opacity, visibility;
 }
 
 .sidebar-overlay[data-state="expanded"] {
@@ -92,10 +96,13 @@
 }
 
 .sidebar-backdrop {
-  @apply fixed inset-0 bg-black/40 z-30 transition-opacity duration-300;
+  @apply fixed inset-0 bg-black/40 z-30;
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, visibility;
 }
 
 .sidebar-backdrop[data-state="expanded"] {
@@ -112,8 +119,9 @@
 
 /* Main content responsiveness */
 .main-content {
-  @apply w-full transition-all duration-200 ease-in-out pt-14;
+  @apply w-full transition-all duration-300 ease-in-out pt-14;
   min-height: calc(100vh - 3.5rem);
+  will-change: margin-left;
 }
 
 @media (min-width: 768px) {
