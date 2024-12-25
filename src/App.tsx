@@ -24,7 +24,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/">
           <div className="min-h-screen w-full bg-background">
             <Navbar />
             <main className="w-full pt-14">
