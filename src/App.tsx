@@ -24,7 +24,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
-        <BrowserRouter basename="/">
+        <BrowserRouter>
           <div className="min-h-screen w-full bg-background">
             <Navbar />
             <main className="w-full pt-14">
@@ -34,7 +34,7 @@ const App = () => (
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/statistics" element={<Statistics />} />
                 <Route path="/profits" element={<Profits />} />
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
           </div>
