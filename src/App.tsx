@@ -29,11 +29,11 @@ const App = () => (
             <Navbar />
             <main className="w-full pt-14">
               <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/editor" element={<Editor />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/statistics" element={<Statistics />} />
-                <Route path="/profits" element={<Profits />} />
+                <Route index element={<Index />} />
+                <Route path="editor" element={<Editor />} />
+                <Route path="blog" element={<Blog />} />
+                <Route path="statistics" element={<Statistics />} />
+                <Route path="profits" element={<Profits />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
