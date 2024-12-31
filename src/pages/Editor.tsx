@@ -1,16 +1,18 @@
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
+import { Button } from "../components/ui/button";
+import { Textarea } from "../components/ui/textarea";
+import { Input } from "../components/ui/input";
 import { useState } from "react";
 import { ArrowLeft, ImagePlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Label } from "@/components/ui/label";
+import { Label } from "../components/ui/label";
+import { useBlog } from '../contexts/BlogContext';
 
 const Editor = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [thumbnail, setThumbnail] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { addPost } = useBlog();
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -23,6 +25,24 @@ const Editor = () => {
     }
   };
 
+  const handlePublish = () => {
+    if (title && content && thumbnail) {
+      const excerpt = content.substring(0, 150) + '...';
+      addPost({
+        title,
+        author: 'John Doe', // Hardcoded for now
+        thumbnail,
+        authorAvatar: 'https://i.pravatar.cc/150?u=john', // Hardcoded for now
+        views: '0',
+        timeAgo: 'Just now',
+        excerpt: excerpt,
+      });
+      navigate('/blog');
+    } else {
+      alert('Please fill in all fields.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <header className="fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 z-50">
@@ -32,7 +52,7 @@ const Editor = () => {
           </Button>
           <div className="flex items-center gap-2">
             <Button variant="outline">Save Draft</Button>
-            <Button>Publish</Button>
+            <Button onClick={handlePublish}>Publish</Button>
           </div>
         </div>
       </header>

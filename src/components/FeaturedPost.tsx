@@ -9,6 +9,7 @@ interface FeaturedPostProps {
   views: string;
   timeAgo: string;
   excerpt: string;
+  className?: string;
 }
 
 export const FeaturedPost = ({
@@ -19,9 +20,10 @@ export const FeaturedPost = ({
   views,
   timeAgo,
   excerpt,
+  className,
 }: FeaturedPostProps) => {
   return (
-    <Card className="rounded-xl overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+    <Card className={`rounded-xl overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow cursor-pointer ${className}`}>
       <div className="grid md:grid-cols-2 gap-6">
         <div className="aspect-video relative rounded-xl overflow-hidden">
           <img
