@@ -1,5 +1,6 @@
-import { Search, Bell, User, Languages, Sun, Moon, LogOut, MoreVertical, Menu } from "lucide-react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
+import { MoreVertical, Menu, Search, Bell } from "lucide-react";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +16,6 @@ import {
   DropdownMenuPortal,
   DropdownMenuSubContent,
 } from "./ui/dropdown-menu";
-import { useState } from "react";
 
 interface NavbarProps {
   avatarUrl?: string;
@@ -66,7 +66,7 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             />
             <Button onClick={handleSearch} className="rounded-l-none bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-black dark:text-white border border-l-0 border-gray-200 dark:border-gray-700">
-              <Search className="h-5 w-5" />
+              <Search />
             </Button>
           </div>
         </div>
@@ -75,7 +75,7 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
           {isLoggedIn ? (
             <>
               <Button variant="ghost" size="icon" className="dark:text-white">
-                <Bell className="h-5 w-5" />
+                <Bell />
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -86,37 +86,31 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem>
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Account</span>
+                    Account
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Languages className="mr-2 h-4 w-4" />
-                    <span>Language</span>
+                    Language
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <span>Location</span>
                   </DropdownMenuItem>
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger>
-                      <Sun className="mr-2 h-4 w-4" />
                       <span>Appearance</span>
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
                       <DropdownMenuSubContent>
                         <DropdownMenuItem onClick={() => toggleTheme("light")}>
-                          <Sun className="mr-2 h-4 w-4" />
-                          <span>Light</span>
+                          Light
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => toggleTheme("dark")}>
-                          <Moon className="mr-2 h-4 w-4" />
-                          <span>Dark</span>
+                          Dark
                         </DropdownMenuItem>
                       </DropdownMenuSubContent>
                     </DropdownMenuPortal>
                   </DropdownMenuSub>
                   <DropdownMenuItem onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Sign out</span>
+                    Sign out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -135,39 +129,31 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="dark:text-white">
-                    <MoreVertical className="h-5 w-5" />
+                    <MoreVertical />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem>
-                    <Languages className="mr-2 h-4 w-4" />
-                    <span>Language</span>
+                    Language
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <span>Location</span>
                   </DropdownMenuItem>
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger>
-                      <Sun className="mr-2 h-4 w-4" />
                       <span>Appearance</span>
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
                       <DropdownMenuSubContent>
                         <DropdownMenuItem onClick={() => toggleTheme("light")}>
-                          <Sun className="mr-2 h-4 w-4" />
-                          <span>Light</span>
+                          Light
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => toggleTheme("dark")}>
-                          <Moon className="mr-2 h-4 w-4" />
-                          <span>Dark</span>
+                          Dark
                         </DropdownMenuItem>
                       </DropdownMenuSubContent>
                     </DropdownMenuPortal>
                   </DropdownMenuSub>
-                  <DropdownMenuItem onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Sign out</span>
-                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>

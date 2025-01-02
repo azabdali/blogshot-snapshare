@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-interface User {
+export interface User {
   avatarUrl: string;
   // Add other relevant user properties here
 }

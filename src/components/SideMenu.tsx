@@ -1,7 +1,7 @@
 import React from 'react';
-import { X, Home, Flame, Compass, HelpCircle, FileText, Shield, Mail, Copyright, BarChart, Settings } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import { Home, TrendingUp, Compass, BarChart, Coins, Settings, HelpCircle, FileText, ShieldCheck, Mail } from 'lucide-react';
 
 interface SideMenuProps {
   isOpen: boolean;
@@ -27,26 +27,25 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
         <div className="p-4 flex justify-between items-center">
           <div className="text-lg font-bold">BlogTube</div>
           <button onClick={onClose} className="rounded-full p-2 hover:bg-gray-100 dark:hover:bg-zinc-700">
-            <X className="h-5 w-5" />
           </button>
         </div>
         <div className="p-4">
           <ul className="space-y-2">
             <li>
               <Link to="/" className="flex items-center space-x-2">
-                <Home className="h-4 w-4" />
+                <Home className="w-4 h-4 mr-2" />
                 <span>Home</span>
               </Link>
             </li>
             <li>
               <Link to="/popular" className="flex items-center space-x-2">
-                <Flame className="h-4 w-4" />
+                <TrendingUp className="w-4 h-4 mr-2" />
                 <span>Popular</span>
               </Link>
             </li>
             <li>
               <Link to="/discover" className="flex items-center space-x-2">
-                <Compass className="h-4 w-4" />
+                <Compass className="w-4 h-4 mr-2" />
                 <span>Discover</span>
               </Link>
             </li>
@@ -58,25 +57,25 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
             <ul className="space-y-2">
               <li>
                 <Link to="/blog" className="flex items-center space-x-2">
-                  <FileText className="h-4 w-4" />
+                  <FileText className="w-4 h-4 mr-2" />
                   <span>Blog</span>
                 </Link>
               </li>
               <li>
                 <Link to="/statistics" className="flex items-center space-x-2">
-                  <BarChart className="h-4 w-4" />
+                  <BarChart className="w-4 h-4 mr-2" />
                   <span>Statistics</span>
                 </Link>
               </li>
               <li>
                 <Link to="/profits" className="flex items-center space-x-2">
-                  <Shield className="h-4 w-4" />
+                  <Coins className="w-4 h-4 mr-2" />
                   <span>Profits</span>
                 </Link>
               </li>
               <li>
                 <Link to="/settings" className="flex items-center space-x-2">
-                  <Settings className="h-4 w-4" />
+                  <Settings className="w-4 h-4 mr-2" />
                   <span>Settings</span>
                 </Link>
               </li>
@@ -96,25 +95,25 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
           <ul className="space-y-2">
             <li>
               <a href="#" className="flex items-center space-x-2">
-                <HelpCircle className="h-4 w-4" />
+                <HelpCircle className="w-4 h-4 mr-2" />
                 <span>Help</span>
               </a>
             </li>
             <li>
               <a href="#" className="flex items-center space-x-2">
-                <FileText className="h-4 w-4" />
+                <FileText className="w-4 h-4 mr-2" />
                 <span>Terms of Service</span>
               </a>
             </li>
             <li>
               <a href="#" className="flex items-center space-x-2">
-                <Shield className="h-4 w-4" />
+                <ShieldCheck className="w-4 h-4 mr-2" />
                 <span>Privacy Policy</span>
               </a>
             </li>
             <li>
               <a href="#" className="flex items-center space-x-2">
-                <Mail className="h-4 w-4" />
+                <Mail className="w-4 h-4 mr-2" />
                 <span>Contact Us</span>
               </a>
             </li>
@@ -122,7 +121,6 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
         </div>
         <div className="p-4 mt-4 border-t dark:border-gray-700">
           <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
-            <Copyright className="h-4 w-4" />
             <span>Copyright BlogTube</span>
           </div>
         </div>

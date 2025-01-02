@@ -2,10 +2,13 @@ import { Button } from "../components/ui/button";
 import { Textarea } from "../components/ui/textarea";
 import { Input } from "../components/ui/input";
 import { useState } from "react";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { ArrowLeft, ImagePlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Label } from "../components/ui/label";
 import { useBlog } from '../contexts/BlogContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const Editor = () => {
   const [title, setTitle] = useState("");
@@ -13,6 +16,7 @@ const Editor = () => {
   const [thumbnail, setThumbnail] = useState<string | null>(null);
   const navigate = useNavigate();
   const { addPost } = useBlog();
+  const { user } = useAuth();
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -29,13 +33,16 @@ const Editor = () => {
     if (title && content && thumbnail) {
       const excerpt = content.substring(0, 150) + '...';
       addPost({
+        id: Date.now().toString(),
         title,
-        author: 'John Doe', // Hardcoded for now
+        author: user?.avatarUrl ? 'Current User' : 'Unknown Author', // Placeholder
         thumbnail,
-        authorAvatar: 'https://i.pravatar.cc/150?u=john', // Hardcoded for now
+        authorAvatar: user?.avatarUrl || '',
         views: '0',
         timeAgo: 'Just now',
         excerpt: excerpt,
+        content: content,
+        user: user || null,
       });
       navigate('/blog');
     } else {
@@ -102,11 +109,32 @@ const Editor = () => {
           className="text-4xl font-bold border-none px-0 focus-visible:ring-0 mb-8 placeholder:text-gray-400"
         />
         
-        <Textarea
-          placeholder="Tell your story..."
+        <ReactQuill
           value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="min-h-[500px] text-lg border-none resize-none focus-visible:ring-0 placeholder:text-gray-400"
+          onChange={setContent}
+          placeholder="Tell your story..."
+          className="min-h-[500px] text-lg"
+          modules={{
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+              ['blockquote', 'code-block'],
+
+              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+              [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+              [{ 'direction': 'rtl' }],                         // text direction
+
+              [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+              [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+              [{ 'font': [] }],
+              [{ 'align': [] }],
+
+              ['clean', 'link', 'image', 'code-block']          // remove formatting button
+            ]
+          }}
         />
       </main>
     </div>
