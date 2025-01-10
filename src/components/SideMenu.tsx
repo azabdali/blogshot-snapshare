@@ -25,7 +25,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
         }`}
       >
         <div className="p-4 flex justify-between items-center">
-          <div className="text-lg font-bold">BlogTube</div>
+          <div className="text-lg font-bold">Blog</div>
           <button onClick={onClose} className="rounded-full p-2 hover:bg-gray-100 dark:hover:bg-zinc-700">
           </button>
         </div>
@@ -121,7 +121,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
         </div>
         <div className="p-4 mt-4 border-t dark:border-gray-700">
           <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
-            <span>Copyright BlogTube</span>
+            <span>Copyright Blog</span>
           </div>
         </div>
       </div>
