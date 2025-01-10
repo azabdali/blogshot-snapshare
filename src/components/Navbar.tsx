@@ -52,7 +52,7 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
       <div className="flex items-center justify-between h-full max-w-[2100px] mx-auto">
         <div className="flex items-center gap-4">
           <Menu onClick={() => setIsSideMenuOpen(true)} className="h-6 w-6 cursor-pointer dark:text-white" />
-          <h1 className="text-xl font-semibold dark:text-white">BlogTube</h1>
+          <h1 className="text-xl font-semibold dark:text-white">Blog</h1>
         </div>
 
         <div className="flex-1 max-w-xl">
