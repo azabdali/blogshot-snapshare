@@ -13,6 +13,9 @@ import Statistics from "./pages/Statistics";
 import Profits from "./pages/Profits";
 import SearchResults from "./pages/SearchResults";
 import PostDetailsPage from "./pages/PostDetailsPage";
+import Popular from "./pages/Popular";
+import Discover from "./pages/Discover";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,10 +36,13 @@ const App = () => (
             <main className="w-full pt-14">
               <Routes>
                 <Route index element={<Index />} />
+                <Route path="popular" element={<Popular />} />
+                <Route path="discover" element={<Discover />} />
                 <Route path="editor" element={<Editor />} />
                 <Route path="blog" element={<Blog />} />
                 <Route path="blog/:postId" element={<PostDetailsPage />} />
                 <Route path="search" element={<SearchResults />} />
+                <Route path="settings" element={<Settings />} />
                 <Route path="statistics" element={<Statistics />} />
                 <Route path="profits" element={<Profits />} />
                 <Route path="*" element={<Navigate to="/" replace />} />

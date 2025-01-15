@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export interface User {
   avatarUrl: string;
+  username?: string; // Added username property
   // Add other relevant user properties here
 }
 

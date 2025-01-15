@@ -9,14 +9,19 @@ import { useNavigate } from "react-router-dom";
 import { Label } from "../components/ui/label";
 import { useBlog } from '../contexts/BlogContext';
 import { useAuth } from '../contexts/AuthContext';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../components/ui/dropdown-menu";
 
 const Editor = () => {
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
   const [thumbnail, setThumbnail] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const navigate = useNavigate();
   const { addPost } = useBlog();
   const { user } = useAuth();
+
+  const categories = ["Technology", "Travel", "Food", "Personal"];
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -30,11 +35,12 @@ const Editor = () => {
   };
 
   const handlePublish = () => {
-    if (title && content && thumbnail) {
-      const excerpt = content.substring(0, 150) + '...';
+    if (title && content && thumbnail && description && selectedCategory) {
+      const excerpt = description.substring(0, 150) + '...';
       addPost({
         id: Date.now().toString(),
         title,
+        description,
         author: user?.avatarUrl ? 'Current User' : 'Unknown Author', // Placeholder
         thumbnail,
         authorAvatar: user?.avatarUrl || '',
@@ -43,10 +49,13 @@ const Editor = () => {
         excerpt: excerpt,
         content: content,
         user: user || null,
+        category: selectedCategory,
+        shares: '0',
+        reads: '0',
       });
       navigate('/blog');
     } else {
-      alert('Please fill in all fields.');
+      alert('Please fill in all fields and select a category.');
     }
   };
 
@@ -58,7 +67,20 @@ const Editor = () => {
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div className="flex items-center gap-2">
-            <Button variant="outline">Save Draft</Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  {selectedCategory || "Categories"}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                {categories.map((category) => (
+                  <DropdownMenuItem key={category} onSelect={() => setSelectedCategory(category)}>
+                    {category}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Button onClick={handlePublish}>Publish</Button>
           </div>
         </div>
@@ -107,6 +129,14 @@ const Editor = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="text-4xl font-bold border-none px-0 focus-visible:ring-0 mb-8 placeholder:text-gray-400"
+        />
+
+        <Input
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="border-none px-0 focus-visible:ring-0 mb-8 placeholder:text-gray-400"
         />
         
         <ReactQuill

@@ -21,7 +21,7 @@ const SearchResults = () => {
         ) : (
           searchResults.map((post) => (
             <FeaturedPost
-              key={post.title}
+              key={post.id}
               {...post}
               className="search-result-card"
             />

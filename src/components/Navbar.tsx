@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { MoreVertical, Menu, Search, Bell } from "lucide-react";
+import { MoreVertical, Search, Bell } from "lucide-react";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ import {
   DropdownMenuPortal,
   DropdownMenuSubContent,
 } from "./ui/dropdown-menu";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 interface NavbarProps {
   avatarUrl?: string;
@@ -26,9 +27,14 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState("notifications");
 
   const handleSearch = () => {
+    if (!searchQuery.trim()) {
+      return;
+    }
     navigate(`/search?q=${searchQuery}`);
   };
 
@@ -51,7 +57,21 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
     <nav className="fixed top-0 left-0 right-0 h-14 bg-white dark:bg-youtube-black border-b border-gray-200 dark:border-gray-800 z-50 px-4">
       <div className="flex items-center justify-between h-full max-w-[2100px] mx-auto">
         <div className="flex items-center gap-4">
-          <Menu onClick={() => setIsSideMenuOpen(true)} className="h-6 w-6 cursor-pointer dark:text-white" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="h-6 w-6 cursor-pointer dark:text-white"
+            onClick={() => setIsSideMenuOpen(true)}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
           <h1 className="text-xl font-semibold dark:text-white">Blog</h1>
         </div>
 
@@ -74,9 +94,30 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
         <div className="flex items-center gap-2 min-w-[200px] justify-end">
           {isLoggedIn ? (
             <>
-              <Button variant="ghost" size="icon" className="dark:text-white">
+              <Button variant="ghost" size="icon" className="dark:text-white relative" onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}>
                 <Bell />
               </Button>
+              {isNotificationsOpen && (
+                <div className="absolute top-full right-0 mt-1 w-80 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-md z-50 origin-top-right">
+                  <Tabs value={activeTab} onValueChange={setActiveTab}>
+                    <TabsList className="grid w-full grid-cols-2">
+                      <TabsTrigger value="notifications">Notifications</TabsTrigger>
+                      <TabsTrigger value="liveChat">Live Chat</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="notifications" className="p-4">
+                      <div>No new notifications</div>
+                    </TabsContent>
+                    <TabsContent value="liveChat" className="p-4">
+                      <div>No active chats</div>
+                    </TabsContent>
+                  </Tabs>
+                  <div className="p-4">
+                    <Button variant="outline" className="w-full" onClick={() => setIsNotificationsOpen(false)}>
+                      Close
+                    </Button>
+                  </div>
+                </div>
+              )}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="h-8 w-8 cursor-pointer">
@@ -115,7 +156,7 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
                 </DropdownMenuContent>
               </DropdownMenu>
               <Button
-                className="bg-youtube-red hover:bg-red-700 text-white"
+                className="bg-black hover:bg-gray-800 text-white"
                 onClick={() => navigate("/editor")}
               >
                 Create Post
@@ -123,8 +164,9 @@ export const Navbar = ({ avatarUrl }: NavbarProps) => {
             </>
           ) : (
             <div className="relative flex items-center gap-2">
-              <Button className="bg-youtube-red hover:bg-red-700 text-white flex items-center gap-2" onClick={handleLogin}>
-                Sign In
+              <Button className="text-white flex items-center gap-2" onClick={handleLogin}>
+                <img src="https://www.google.com/favicon.ico" alt="Google Logo" className="h-5 w-5 mr-2" />
+                Sign up
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

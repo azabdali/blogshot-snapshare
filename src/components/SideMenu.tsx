@@ -85,8 +85,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
           <div className="p-4 mt-4 border-t dark:border-gray-700">
             <h6 className="uppercase text-xs text-gray-500 dark:text-gray-400 mb-2">You</h6>
             <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">Log in to access more features.</p>
-            <button className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-              Log In
+            <button className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center gap-2">
+              <img src="https://www.google.com/favicon.ico" alt="Google Logo" className="h-5 w-5" />
+              Sign in
             </button>
           </div>
         )}

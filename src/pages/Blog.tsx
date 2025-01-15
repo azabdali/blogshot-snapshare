@@ -23,7 +23,7 @@ export const BlogPosts = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-      <h2 className="text-xl font-bold mb-4">My Blog Posts</h2>
+      <h2 className="text-xl font-bold mb-4">Blog Posts</h2>
       <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {userPosts.map((post) => (
           <BlogCard key={post.title} post={post} />
@@ -36,25 +36,27 @@ export const BlogPosts = () => {
 const Blog = () => {
   const [isEditing, setIsEditing] = useState(false);
   const { user: authUser } = useAuth();
-  const [profile, setProfile] = useState({
-    name: 'John Doe',
+  const [profile, setProfile] = useState(() => ({
+    name: authUser?.username || 'John Doe',
+    username: authUser?.username || '',
     description:
       'Technical writer and software developer. Passionate about creating content that helps others learn and grow.',
     avatarUrl: authUser?.avatarUrl || 'https://i.pravatar.cc/150?u=user',
-  });
+  }));
   const { posts } = useBlog();
 
   useEffect(() => {
     if (authUser) {
-      setProfile({
-        name: 'Current User',
-        description: '...',
+      setProfile(prevProfile => ({
+        ...prevProfile,
+        name: authUser.username || 'Current User',
+        username: authUser.username || '',
         avatarUrl: authUser.avatarUrl,
-      });
+      }));
     }
   }, [authUser]);
 
-  const updateProfile = (newProfile: { name: string; description: string; avatarUrl: string }) => {
+  const updateProfile = (newProfile: { name: string; description: string; avatarUrl: string; username: string }) => {
     setProfile(newProfile);
     setIsEditing(false);
   };
@@ -72,12 +74,28 @@ const Blog = () => {
               </AvatarFallback>
             </Avatar>
             <div className="flex-1">
-              <h1 className="text-2xl font-bold mb-2">{profile.name}</h1>
+              <h1 className="text-2xl font-bold mb-1">{profile.name}</h1>
+              <h2 className="text-lg font-semibold text-gray-700 mb-4">
+                @{profile.username}
+              </h2>
               <p className="text-gray-600 mb-4">{profile.description}</p>
-              <div className="flex gap-4 text-sm text-gray-600">
-                <span>{posts.length} Posts</span>
-                <span>12.5K Views</span>
-                <span>Joined Jan 2024</span>
+              <div className="flex justify-between items-center">
+                <div className="flex gap-4 text-sm text-gray-600">
+                  <span>Joined Jan 2024</span>
+                  <span>{posts.length} Posts</span>
+                  <span>12.5K Views</span>
+                </div>
+                <div className="flex gap-4">
+                  <a href="#" className="text-gray-500 hover:text-gray-700">
+                    LinkedIn
+                  </a>
+                  <a href="#" className="text-gray-500 hover:text-gray-700">
+                    Twitter
+                  </a>
+                  <a href="#" className="text-gray-500 hover:text-gray-700">
+                    GitHub
+                  </a>
+                </div>
               </div>
             </div>
             <AlertDialog open={isEditing} onOpenChange={setIsEditing}>
