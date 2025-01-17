@@ -170,6 +170,9 @@ const Settings = () => {
                 {isIdentityVerified ? 'Verified' : 'Not Verified'}
               </p>
             </div>
+            <div>
+              <Button variant="destructive">Delete Account</Button>
+            </div>
           </div>
         </section>
       )}
