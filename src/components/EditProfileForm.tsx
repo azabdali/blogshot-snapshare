@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
-import { FaGlobe, FaTwitter, FaGithub } from 'react-icons/fa';
+import { FaYoutube, FaEnvelope, FaFacebook, FaGlobe, FaTwitter, FaGithub } from 'react-icons/fa';
 
 interface EditProfileFormProps {
   onSubmit: (profile: { name: string; description: string; avatarUrl: string; username: string; website: string; twitter: string; github: string }) => void;
@@ -72,6 +72,9 @@ const EditProfileForm: React.FC<EditProfileFormProps> = ({ onSubmit, initialProf
             onChange={(e) => setDescription(e.target.value)}
           />
           <div className="flex items-center space-x-4 mt-2">
+            <FaYoutube size={20} className="cursor-pointer" onClick={() => setShowWebsiteInput(!showWebsiteInput)} />
+            <FaEnvelope size={20} className="cursor-pointer" onClick={() => setShowTwitterInput(!showTwitterInput)} />
+            <FaFacebook size={20} className="cursor-pointer" onClick={() => setShowGithubInput(!showGithubInput)} />
             <FaGlobe size={20} className="cursor-pointer" onClick={() => setShowWebsiteInput(!showWebsiteInput)} />
             <FaTwitter size={20} className="cursor-pointer" onClick={() => setShowTwitterInput(!showTwitterInput)} />
             <FaGithub size={20} className="cursor-pointer" onClick={() => setShowGithubInput(!showGithubInput)} />
