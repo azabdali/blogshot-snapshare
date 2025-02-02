@@ -2,8 +2,6 @@ import { Button } from "../components/ui/button";
 import { Textarea } from "../components/ui/textarea";
 import { Input } from "../components/ui/input";
 import { useState } from "react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { ArrowLeft, ImagePlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Label } from "../components/ui/label";
@@ -123,8 +121,7 @@ const Editor = () => {
           </div>
         </div>
         
-        <Input
-          type="text"
+        <Textarea
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -138,33 +135,18 @@ const Editor = () => {
           onChange={(e) => setDescription(e.target.value)}
           className="border-none px-0 focus-visible:ring-0 mb-8 placeholder:text-gray-400"
         />
-        
-        <ReactQuill
+
+        <Textarea
+          placeholder="Content"
           value={content}
-          onChange={setContent}
-          placeholder="Tell your story..."
-          className="min-h-[500px] text-lg"
-          modules={{
-            toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-              ['blockquote', 'code-block'],
+          onChange={(e) => setContent(e.target.value)}
+          className="border-none px-0 focus-visible:ring-0 mb-8 placeholder:text-gray-400"
+        />
 
-              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-              [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-              [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-              [{ 'direction': 'rtl' }],                         // text direction
-
-              [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-              [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-              [{ 'font': [] }],
-              [{ 'align': [] }],
-
-              ['clean', 'link', 'image', 'code-block']          // remove formatting button
-            ]
-          }}
+        <Input
+          type="text"
+          placeholder="Tags"
+          className="border-none px-0 focus-visible:ring-0 mb-8 placeholder:text-gray-400"
         />
       </main>
     </div>

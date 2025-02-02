@@ -14,6 +14,15 @@ const categories = [
   "Health",
   "Finance",
   "Education",
+  "Entertainment",
+  "Science",
+  "Environment",
+  "Personal",
+  "Fashion",
+  "Sports",
+  "History",
+  "Photography",
+  "Art",
 ];
 
 export const CategoryBar = () => {

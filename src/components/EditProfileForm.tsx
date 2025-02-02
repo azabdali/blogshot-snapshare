@@ -3,11 +3,17 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
-import { FaYoutube, FaEnvelope, FaFacebook, FaGlobe, FaTwitter, FaGithub } from 'react-icons/fa';
+import { FaYoutube, FaEnvelope, FaFacebook, FaGlobe, FaTwitter, FaTiktok, FaInstagram, FaLinkedin, FaGithub, FaWhatsapp, FaBloggerB } from 'react-icons/fa';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from './ui/alert-dialog';
 
 interface EditProfileFormProps {
-  onSubmit: (profile: { name: string; description: string; avatarUrl: string; username: string; website: string; twitter: string; github: string }) => void;
-  initialProfile: { name: string; description: string; avatarUrl: string; username: string; website: string; twitter: string; github: string };
+  onSubmit: (profile: { name: string; description: string; avatarUrl: string; username: string; website: string; twitter: string; github: string, instagram: string, linkedin: string, whatsapp: string, blogger: string }) => void;
+  initialProfile: { name: string; description: string; avatarUrl: string; username: string; website: string; twitter: string; github: string, instagram: string, linkedin: string, whatsapp: string, blogger: string };
   onClose: () => void;
 }
 
@@ -19,9 +25,11 @@ const EditProfileForm: React.FC<EditProfileFormProps> = ({ onSubmit, initialProf
   const [website, setWebsite] = useState(initialProfile.website || '');
   const [twitter, setTwitter] = useState(initialProfile.twitter || '');
   const [github, setGithub] = useState(initialProfile.github || '');
-  const [showWebsiteInput, setShowWebsiteInput] = useState(false);
-  const [showTwitterInput, setShowTwitterInput] = useState(false);
-  const [showGithubInput, setShowGithubInput] = useState(false);
+  const [instagram, setInstagram] = useState(initialProfile.instagram || '');
+  const [linkedin, setLinkedin] = useState(initialProfile.linkedin || '');
+  const [whatsapp, setWhatsapp] = useState(initialProfile.whatsapp || '');
+  const [blogger, setBlogger] = useState(initialProfile.blogger || '');
+  const [activeInput, setActiveInput] = useState<string | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -35,7 +43,85 @@ const EditProfileForm: React.FC<EditProfileFormProps> = ({ onSubmit, initialProf
   };
 
   const handleSubmit = () => {
-    onSubmit({ name, username, description, avatarUrl: avatarUrl || '', website, twitter, github });
+    onSubmit({ name, username, description, avatarUrl: avatarUrl || '', website, twitter, github, instagram, linkedin, whatsapp, blogger });
+  };
+
+  const renderInputModal = (inputType: string) => {
+    let inputField = null;
+    let icon = null;
+    let title = '';
+
+    switch (inputType) {
+      case 'website':
+        inputField = <Input type="text" id="website" placeholder="Your YouTube URL" value={website} onChange={(e) => setWebsite(e.target.value)} />;
+        icon = <FaYoutube size={20} style={{ color: '#FF0000' }} />;
+        title = 'YouTube';
+        break;
+      case 'envelope':
+        inputField = <Input type="email" id="envelope" placeholder="Your Email Address" value={''} onChange={(e) => {}} />;
+        icon = <FaEnvelope size={20} style={{ color: '#777777' }} />;
+        title = 'Email';
+        break;
+      case 'facebook':
+        inputField = <Input type="text" id="facebook" placeholder="Your Facebook URL" value={''} onChange={(e) => {}} />;
+        icon = <FaFacebook size={20} style={{ color: '#1877F2' }} />;
+        title = 'Facebook';
+        break;
+      case 'globe':
+        inputField = <Input type="text" id="globe" placeholder="Your Website URL" value={''} onChange={(e) => {}} />;
+        icon = <FaGlobe size={20} style={{ color: '#000000' }} />;
+        title = 'Website';
+        break;
+      case 'twitter':
+        inputField = <Input type="text" id="twitter" placeholder="Your Twitter URL" value={twitter} onChange={(e) => setTwitter(e.target.value)} />;
+        icon = <FaTwitter size={20} style={{ color: '#1DA1F2' }} />;
+        title = 'Twitter';
+        break;
+      case 'tiktok':
+        inputField = <Input type="text" id="tiktok" placeholder="Your TikTok URL" value={''} onChange={(e) => {}} />;
+        icon = <FaTiktok size={20} style={{ color: '#000000' }} />;
+        title = 'TikTok';
+        break;
+      case 'instagram':
+        inputField = <Input type="text" id="instagram" placeholder="Your Instagram URL" value={''} onChange={(e) => setInstagram(e.target.value)} />;
+        icon = <FaInstagram size={20} style={{ color: '#C13584' }} />;
+        title = 'Instagram';
+        break;
+      case 'linkedin':
+        inputField = <Input type="text" id="linkedin" placeholder="Your LinkedIn URL" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />;
+        icon = <FaLinkedin size={20} style={{ color: '#0077B5' }} />;
+        title = 'LinkedIn';
+        break;
+      case 'github':
+        inputField = <Input type="text" id="github" placeholder="Your GitHub URL" value={github} onChange={(e) => setGithub(e.target.value)} />;
+        icon = <FaGithub size={20} style={{ color: '#333' }} />;
+        title = 'GitHub';
+        break;
+      case 'whatsapp':
+        inputField = <Input type="text" id="whatsapp" placeholder="Your WhatsApp URL" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} />;
+        icon = <FaWhatsapp size={20} style={{ color: '#25D366' }} />;
+        title = 'WhatsApp';
+        break;
+      case 'blogger':
+        inputField = <Input type="text" id="blogger" placeholder="Your Blogger URL" value={blogger} onChange={(e) => setBlogger(e.target.value)} />;
+        icon = <FaBloggerB size={20} style={{ color: '#F57C00' }} />;
+        title = 'Blogger';
+        break;
+      default:
+        return null;
+    }
+
+    return (
+      <AlertDialog open={activeInput === inputType} onOpenChange={() => setActiveInput(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center space-x-2">{icon}<span>{title}</span></AlertDialogTitle>
+          </AlertDialogHeader>
+          {inputField}
+          <Button onClick={() => setActiveInput(null)}>Close</Button>
+        </AlertDialogContent>
+      </AlertDialog>
+    );
   };
 
   return (
@@ -72,38 +158,31 @@ const EditProfileForm: React.FC<EditProfileFormProps> = ({ onSubmit, initialProf
             onChange={(e) => setDescription(e.target.value)}
           />
           <div className="flex items-center space-x-4 mt-2">
-            <FaYoutube size={20} className="cursor-pointer" onClick={() => setShowWebsiteInput(!showWebsiteInput)} />
-            <FaEnvelope size={20} className="cursor-pointer" onClick={() => setShowTwitterInput(!showTwitterInput)} />
-            <FaFacebook size={20} className="cursor-pointer" onClick={() => setShowGithubInput(!showGithubInput)} />
-            <FaGlobe size={20} className="cursor-pointer" onClick={() => setShowWebsiteInput(!showWebsiteInput)} />
-            <FaTwitter size={20} className="cursor-pointer" onClick={() => setShowTwitterInput(!showTwitterInput)} />
-            <FaGithub size={20} className="cursor-pointer" onClick={() => setShowGithubInput(!showGithubInput)} />
+            <FaYoutube size={20} style={{ color: '#FF0000' }} className="cursor-pointer" onClick={() => setActiveInput('website')} />
+            <FaEnvelope size={20} style={{ color: '#777777' }} className="cursor-pointer" onClick={() => setActiveInput('envelope')} />
+            <FaFacebook size={20} style={{ color: '#1877F2' }} className="cursor-pointer" onClick={() => setActiveInput('facebook')} />
+            <FaGlobe size={20} style={{ color: '#000000' }} className="cursor-pointer" onClick={() => setActiveInput('globe')} />
+            <FaTwitter size={20} style={{ color: '#1DA1F2' }} className="cursor-pointer" onClick={() => setActiveInput('twitter')} />
+            <FaTiktok size={20} style={{ color: '#000000' }} className="cursor-pointer" onClick={() => setActiveInput('tiktok')} />
+            <FaInstagram size={20} style={{ color: '#C13584' }} className="cursor-pointer" onClick={() => setActiveInput('instagram')} />
+            <FaLinkedin size={20} style={{ color: '#0077B5' }} className="cursor-pointer" onClick={() => setActiveInput('linkedin')} />
+            <FaGithub size={20} style={{ color: '#333' }} className="cursor-pointer" onClick={() => setActiveInput('github')} />
+            <FaWhatsapp size={20} style={{ color: '#25D366' }} className="cursor-pointer" onClick={() => setActiveInput('whatsapp')} />
+            <FaBloggerB size={20} style={{ color: '#F57C00' }} className="cursor-pointer" onClick={() => setActiveInput('blogger')} />
           </div>
         </div>
-        {showWebsiteInput && (
-          <div>
-            <label htmlFor="website" className="block text-sm font-medium text-gray-700">
-              Website
-            </label>
-            <Input type="text" id="website" placeholder="Your website URL" value={website} onChange={(e) => setWebsite(e.target.value)} />
-          </div>
-        )}
-        {showTwitterInput && (
-          <div>
-            <label htmlFor="twitter" className="block text-sm font-medium text-gray-700">
-              Twitter
-            </label>
-            <Input type="text" id="twitter" placeholder="Your Twitter URL" value={twitter} onChange={(e) => setTwitter(e.target.value)} />
-          </div>
-        )}
-        {showGithubInput && (
-          <div>
-            <label htmlFor="github" className="block text-sm font-medium text-gray-700">
-              GitHub
-            </label>
-            <Input type="text" id="github" placeholder="Your GitHub URL" value={github} onChange={(e) => setGithub(e.target.value)} />
-          </div>
-        )}
+        {renderInputModal('website')}
+        {renderInputModal('envelope')}
+        {renderInputModal('facebook')}
+        {renderInputModal('globe')}
+        {renderInputModal('twitter')}
+        {renderInputModal('tiktok')}
+        {renderInputModal('instagram')}
+        {renderInputModal('linkedin')}
+        {renderInputModal('github')}
+        {renderInputModal('whatsapp')}
+        {renderInputModal('blogger')}
+
         <div className="flex justify-end gap-2">
           <Button type="button" onClick={onClose} variant="outline">
             Close

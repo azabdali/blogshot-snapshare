@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { FaYoutube, FaTwitter, FaGithub, FaInstagram, FaLinkedin, FaWhatsapp, FaBloggerB } from 'react-icons/fa';
 import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Button } from '../components/ui/button';
 import { Navbar } from '../components/Navbar';
@@ -42,6 +43,13 @@ const Blog = () => {
     description:
       'Technical writer and software developer. Passionate about creating content that helps others learn and grow.',
     avatarUrl: authUser?.avatarUrl || 'https://i.pravatar.cc/150?u=user',
+    website: '',
+    twitter: '',
+    github: '',
+    instagram: '',
+    linkedin: '',
+    whatsapp: '',
+    blogger: '',
   }));
   const { posts } = useBlog();
 
@@ -56,7 +64,7 @@ const Blog = () => {
     }
   }, [authUser]);
 
-  const updateProfile = (newProfile: { name: string; description: string; avatarUrl: string; username: string }) => {
+  const updateProfile = (newProfile: { name: string; username: string; description: string; avatarUrl: string, website: string, twitter: string, github: string, instagram: string, linkedin: string, whatsapp: string, blogger: string }) => {
     setProfile(newProfile);
     setIsEditing(false);
   };
@@ -84,17 +92,44 @@ const Blog = () => {
                   <span>Joined Jan 2024</span>
                   <span>{posts.length} Posts</span>
                   <span>12.5K Views</span>
-                </div>
+                  <span>France</span>
+                  </div>
                 <div className="flex gap-4">
-                  <a href="#" className="text-gray-500 hover:text-gray-700">
-                    LinkedIn
-                  </a>
-                  <a href="#" className="text-gray-500 hover:text-gray-700">
-                    Twitter
-                  </a>
-                  <a href="#" className="text-gray-500 hover:text-gray-700">
-                    GitHub
-                  </a>
+                  {profile.website && (
+                    <a href={profile.website} className="text-gray-500 hover:text-gray-700">
+                      <FaYoutube size={20} />
+                    </a>
+                  )}
+                  {profile.twitter && (
+                    <a href={profile.twitter} className="text-gray-500 hover:text-gray-700">
+                      <FaTwitter size={20} />
+                    </a>
+                  )}
+                  {profile.github && (
+                    <a href={profile.github} className="text-gray-500 hover:text-gray-700">
+                      <FaGithub size={20} />
+                    </a>
+                  )}
+                  {profile.instagram && (
+                    <a href={profile.instagram} className="text-gray-500 hover:text-gray-700">
+                      <FaInstagram size={20} />
+                    </a>
+                  )}
+                  {profile.linkedin && (
+                    <a href={profile.linkedin} className="text-gray-500 hover:text-gray-700">
+                      <FaLinkedin size={20} />
+                    </a>
+                  )}
+                  {profile.whatsapp && (
+                    <a href={profile.whatsapp} className="text-gray-500 hover:text-gray-700">
+                      <FaWhatsapp size={20} />
+                    </a>
+                  )}
+                  {profile.blogger && (
+                    <a href={profile.blogger} className="text-gray-500 hover:text-gray-700">
+                      <FaBloggerB size={20} />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -104,10 +139,6 @@ const Blog = () => {
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Edit Profile</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Make changes to your profile here. Click save when you're done.
-                  </AlertDialogDescription>
                 </AlertDialogHeader>
                 <EditProfileForm onSubmit={updateProfile} initialProfile={profile} onClose={() => setIsEditing(false)} />
               </AlertDialogContent>

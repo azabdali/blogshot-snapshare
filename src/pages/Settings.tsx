@@ -25,6 +25,10 @@ const Settings = () => {
     website: '',
     twitter: '',
     github: '',
+    instagram: '',
+    linkedin: '',
+    whatsapp: '',
+    blogger: '',
   };
 
   const handleProfileSubmit = (profileData: { name: string; description: string; avatarUrl: string }) => {
@@ -142,6 +146,12 @@ const Settings = () => {
                 Show Views
               </label>
               <Switch id="showViews" checked={showViews} onCheckedChange={setShowViews} />
+            </div>
+            <div className="flex items-center justify-between">
+              <label htmlFor="showCountry" className="block text-sm font-medium text-gray-700">
+                Show Country
+              </label>
+              <Switch id="showCountry" />
             </div>
 
           </div>
